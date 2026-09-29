@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="graphite">#FF121315</color>
+    <color name="surface">#FF1E2024</color>
+    <color name="fire">#FFFF7A1A</color>
+    <color name="fire_soft">#FFFFB347</color>
+</resources>

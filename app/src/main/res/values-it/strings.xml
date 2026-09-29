@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Onboarding -->
+    <string name="onboarding_title">DNS più veloce e privato, in un tocco</string>
+    <string name="onboarding_point_what">Passa da Cloudflare, Google, AdGuard, Quad9 o un tuo DNS senza toccare le impostazioni Wi-Fi.</string>
+    <string name="onboarding_point_vpn">FireDNS usa una VPN locale, quindi Android chiederà il permesso. Solo le query DNS passano da lì.</string>
+    <string name="onboarding_point_privacy">Nessun dato lascia il dispositivo, tranne le query DNS verso il provider scelto.</string>
+    <string name="action_continue">Continua</string>
+
+    <!-- Home -->
+    <string name="status_off">Disattivo</string>
+    <string name="status_starting">Avvio…</string>
+    <string name="status_active">Attivo</string>
+    <string name="status_fallback">Fallback</string>
+    <string name="status_error">Errore</string>
+    <string name="a11y_power_on">Attiva FireDNS</string>
+    <string name="a11y_power_off">Disattiva FireDNS</string>
+    <string name="a11y_active_profile">attivo</string>
+    <string name="banner_fallback">DNS non raggiungibile — sto usando il DNS di rete</string>
+    <string name="banner_permission_denied">Permesso VPN negato</string>
+    <string name="banner_revoked">Un\'altra VPN ha preso il controllo</string>
+    <string name="action_retry">Riprova</string>
+    <string name="home_profiles">Profili</string>
+    <string name="add_dns">Aggiungi DNS</string>
+    <string name="menu_edit">Modifica</string>
+    <string name="menu_delete">Elimina</string>
+    <string name="action_cancel">Annulla</string>
+    <string name="delete_title">Eliminare %1$s?</string>
+    <string name="delete_message">Il profilo DNS verrà rimosso.</string>
+
+    <!-- Editor -->
+    <string name="editor_title_new">Nuovo DNS</string>
+    <string name="editor_title_edit">Modifica DNS</string>
+    <string name="editor_name">Nome</string>
+    <string name="editor_name_hint">es. NextDNS casa</string>
+    <string name="editor_address">Indirizzo</string>
+    <string name="editor_address_hint">IP (es. 192.168.1.2) oppure URL DoH (https://…)</string>
+    <string name="editor_address_invalid">Inserisci un indirizzo IP o un URL https://</string>
+    <string name="editor_detected">Protocollo rilevato</string>
+    <string name="editor_save">Salva</string>
+    <string name="editor_help_title">Esempi</string>
+    <string name="editor_help_nextdns">NextDNS: https://dns.nextdns.io/&lt;tuo ID&gt;</string>
+    <string name="editor_help_pihole">Pi-hole o router: 192.168.1.2</string>
+    <string name="editor_help_note">Gli indirizzi IP usano il DNS classico (UDP). Gli indirizzi https:// usano DNS-over-HTTPS cifrato.</string>
+
+    <!-- Settings and about -->
+    <string name="settings_title">Impostazioni</string>
+    <string name="settings_autostart">Avvia all\'accensione</string>
+    <string name="settings_autostart_desc">Riattiva FireDNS quando la Fire TV si riavvia</string>
+    <string name="settings_fallback">Fallback automatico</string>
+    <string name="settings_fallback_desc">Usa il DNS di rete se quello scelto non risponde</string>
+    <string name="settings_info">Info</string>
+    <string name="settings_info_desc">Versione, licenza, codice sorgente</string>
+    <string name="info_version">Versione %1$s</string>
+    <string name="info_source">Codice sorgente</string>
+    <string name="info_license_label">Licenza</string>
+    <string name="info_license">MIT</string>
+    <string name="info_disclaimer">FireDNS è pensato per privacy, blocco pubblicità e velocità. Usalo nel rispetto delle leggi del tuo paese.</string>
+
+    <!-- Notification -->
+    <string name="notif_channel">Stato di FireDNS</string>
+    <string name="notif_starting">Avvio di FireDNS…</string>
+    <string name="notif_active">FireDNS attivo · %1$s</string>
+    <string name="notif_fallback">FireDNS in fallback · DNS di rete</string>
+    <string name="notif_turn_off">Disattiva</string>
+</resources>

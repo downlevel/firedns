@@ -1,0 +1,10 @@
+.gradle/
+build/
+.kotlin/
+local.properties
+.idea/
+*.iml
+.DS_Store
+
+# Internal analysis, not published
+IDEA_VALIDATION_*.md

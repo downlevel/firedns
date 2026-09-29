@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Window theme: dark background only, to avoid white flashes; the UI is in Compose. -->
+    <style name="Theme.FireDns" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@color/graphite</item>
+    </style>
+</resources>

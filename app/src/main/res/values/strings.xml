@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">FireDNS</string>
+    <string name="repo_url" translatable="false">https://github.com/downlevel/firedns</string>
+    <string name="add_dns_hint" translatable="false">NextDNS, Pi-hole…</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_title">Faster, private DNS in one click</string>
+    <string name="onboarding_point_what">Switch between Cloudflare, Google, AdGuard, Quad9 or your own DNS without touching Wi-Fi settings.</string>
+    <string name="onboarding_point_vpn">FireDNS uses a local VPN, so Android will ask for permission. Only DNS queries go through it.</string>
+    <string name="onboarding_point_privacy">No data leaves your device except DNS queries to the provider you choose.</string>
+    <string name="action_continue">Continue</string>
+
+    <!-- Home -->
+    <string name="status_off">Off</string>
+    <string name="status_starting">Starting…</string>
+    <string name="status_active">Active</string>
+    <string name="status_fallback">Fallback</string>
+    <string name="status_error">Error</string>
+    <string name="a11y_power_on">Turn on FireDNS</string>
+    <string name="a11y_power_off">Turn off FireDNS</string>
+    <string name="a11y_active_profile">active</string>
+    <string name="banner_fallback">DNS unreachable — using the network DNS</string>
+    <string name="banner_permission_denied">VPN permission denied</string>
+    <string name="banner_revoked">Another VPN took over</string>
+    <string name="action_retry">Retry</string>
+    <string name="home_profiles">Profiles</string>
+    <string name="add_dns">Add DNS</string>
+    <string name="menu_edit">Edit</string>
+    <string name="menu_delete">Delete</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="delete_title">Delete %1$s?</string>
+    <string name="delete_message">This DNS profile will be removed.</string>
+
+    <!-- Editor -->
+    <string name="editor_title_new">New DNS</string>
+    <string name="editor_title_edit">Edit DNS</string>
+    <string name="editor_name">Name</string>
+    <string name="editor_name_hint">e.g. NextDNS home</string>
+    <string name="editor_address">Address</string>
+    <string name="editor_address_hint">IP (e.g. 192.168.1.2) or DoH URL (https://…)</string>
+    <string name="editor_address_invalid">Enter an IP address or an https:// URL</string>
+    <string name="editor_detected">Detected protocol</string>
+    <string name="editor_save">Save</string>
+    <string name="editor_help_title">Examples</string>
+    <string name="editor_help_nextdns">NextDNS: https://dns.nextdns.io/&lt;your ID&gt;</string>
+    <string name="editor_help_pihole">Pi-hole or router: 192.168.1.2</string>
+    <string name="editor_help_note">IP addresses use classic DNS (UDP). https:// addresses use encrypted DNS-over-HTTPS.</string>
+
+    <!-- Settings and about -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_autostart">Start on boot</string>
+    <string name="settings_autostart_desc">Turn FireDNS back on when the Fire TV restarts</string>
+    <string name="settings_fallback">Automatic fallback</string>
+    <string name="settings_fallback_desc">Use the network DNS if the chosen one doesn\'t respond</string>
+    <string name="settings_info">About</string>
+    <string name="settings_info_desc">Version, license, source code</string>
+    <string name="info_version">Version %1$s</string>
+    <string name="info_source">Source code</string>
+    <string name="info_license_label">License</string>
+    <string name="info_license">MIT</string>
+    <string name="info_disclaimer">FireDNS is meant for privacy, ad blocking and speed. Use it in compliance with the laws of your country.</string>
+
+    <!-- Notification -->
+    <string name="notif_channel">FireDNS status</string>
+    <string name="notif_starting">FireDNS is starting…</string>
+    <string name="notif_active">FireDNS active · %1$s</string>
+    <string name="notif_fallback">FireDNS fallback · using the network DNS</string>
+    <string name="notif_turn_off">Turn off</string>
+</resources>
