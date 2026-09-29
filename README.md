@@ -30,7 +30,13 @@ Tested on: Fire TV Stick HD (1st gen), Fire OS 7.7.
 
 ## Install
 
-**With Downloader** (recommended): install [Downloader](https://www.amazon.com/dp/B01N0BP507) from the Amazon Appstore, then enter this URL:
+**With Downloader** (recommended): install [Downloader](https://www.amazon.com/dp/B01N0BP507) from the Amazon Appstore, open it and enter the code:
+
+```
+8088747
+```
+
+or the full URL, which always points to the latest release:
 
 ```
 https://github.com/downlevel/firedns/releases/latest/download/firedns.apk

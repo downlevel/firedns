@@ -18,7 +18,7 @@
 - [x] `ci.yml` workflow: ktlint + lint + unit tests + assembleDebug on push/PR
 - [x] Release keystore generated and uploaded to GitHub Secrets (`KEYSTORE_BASE64`, `KEYSTORE_PASSWORD`, `KEY_ALIAS`, `KEY_PASSWORD`)
 - [x] `release.yml` workflow: on `v*` tags → keystore check → signed assembleRelease → `firedns.apk` → GitHub Release (verified with v0.9.x)
-- [ ] Check that `releases/latest/download/firedns.apk` downloads the latest release (needs a public repository)
+- [x] Check that `releases/latest/download/firedns.apk` downloads the latest release (verified with Downloader)
 - [x] `AppContainer` (manual DI) and `FireDnsApp`
 - [x] `DnsProfile`, `Settings` models + `Presets.kt` (Cloudflare, Google, AdGuard, Quad9 with DoH URLs and bootstrap IPs)
 - [x] Custom address validation (`DnsAddress.parse`: IPv4/IPv6 → UDP, `https://` → DoH) + unit tests
@@ -63,7 +63,7 @@
 - [ ] Measure added latency and idle RAM/CPU on the weakest Stick
 - [x] README with screenshots, Downloader install guide, FAQ (VPN slot, privacy), disclaimer
 - [x] Test releases v0.9.0 – v0.9.3 through the signed release pipeline
-- [ ] Make the repository public and test the install from Downloader
+- [x] Make the repository public and test the install from Downloader (code 8088747)
 - [ ] Tag `v1.0.0` → Release → register a Downloader short code
 - [ ] Announce on r/fireTV, r/Adguard, r/nextdns, XDA (privacy/ad-blocking positioning only)
 
