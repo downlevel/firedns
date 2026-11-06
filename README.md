@@ -26,11 +26,18 @@ Fire TV devices running **Fire OS 7 or later** (Android 9+): Fire TV Stick 4K Ma
 
 **Not supported:** devices running **Vega OS** (Fire TV Stick 4K Select, Fire TV Stick HD 2nd gen), which cannot install Android apps.
 
+**Google TV / Android TV:** it is a standard Android TV app (Android 9+), so it should work, but it has not been tested yet. If you try it, please report back in an issue.
+
 Tested on: Fire TV Stick HD (1st gen), Fire OS 7.7.
 
 ## Install
 
-**With Downloader** (recommended): install [Downloader](https://www.amazon.com/dp/B01N0BP507) from the Amazon Appstore, open it and enter the code:
+**With Downloader** (recommended):
+
+1. Install [Downloader](https://www.amazon.com/dp/B01N0BP507) from the Amazon Appstore.
+2. Go to *Settings → My Fire TV → Developer options → Install unknown apps* and turn it **on for Downloader**.
+   If you don't see *Developer options*, open *Settings → My Fire TV → About* and click the device name 7 times.
+3. Open Downloader and enter the code:
 
 ```
 8088747
@@ -55,6 +62,25 @@ Open **FireDNS** from *Your Apps*, press **Continue** and accept Android's VPN p
 
 **Why does it need VPN permission?**
 Android does not let apps change the Wi-Fi DNS since Android 10. A local VPN is the only way to redirect DNS without root. FireDNS routes only DNS addresses into it: your streams and downloads never pass through the app.
+
+**Does it need to stay running? Can I force close it?**
+It needs to stay running: if you force close it, the Fire TV goes back to your network DNS. You don't have to keep the app open, though. It runs as a lightweight background service and starts on boot, so you set it once and forget about it.
+
+**Does it block ads on YouTube, Prime Video, Hotstar…?**
+No. Those apps serve ads from the same servers as the video, so no DNS-based blocker (FireDNS, Pi-hole, AdGuard DNS…) can block them without breaking playback. With *AdGuard DNS* FireDNS blocks a lot of ads and trackers in other apps and on websites.
+
+**Can I use NextDNS or my Pi-hole?**
+Yes. Press *Add DNS* and enter:
+- NextDNS: `https://dns.nextdns.io/<your configuration ID>` (encrypted, uses your NextDNS blocklists)
+- Pi-hole or your router: its IP address, e.g. `192.168.1.2`
+
+**Can I block specific domains, such as Amazon updates?**
+Not with the built-in providers. Use NextDNS or a Pi-hole as a custom DNS and set up your own blocklist there. Keep in mind that blocking update servers also blocks security patches.
+
+**Fire OS adds its own extra DNS servers. Does FireDNS still catch all queries?**
+FireDNS catches the queries the system sends to the virtual DNS and to the **public** DNS servers of your network (e.g. `8.8.8.8` set on the Wi-Fi), and answers them with your chosen provider. It cannot catch:
+- apps with their own built-in encrypted DNS (DoH), which bypass any DNS-level tool, Pi-hole included;
+- local DNS addresses (router, Pi-hole), which stay outside the tunnel on purpose, so that other traffic to those devices is not affected.
 
 **Can I use it together with another VPN?**
 No. Android allows one VPN at a time. If you turn on another VPN, FireDNS stops and tells you.
