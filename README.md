@@ -60,6 +60,12 @@ Open **FireDNS** from *Your Apps*, press **Continue** and accept Android's VPN p
 
 ## FAQ
 
+**What do I gain by changing DNS?**
+DNS is how your Fire TV finds the address of a service, and by default it uses your internet provider's. With FireDNS you get encrypted lookups, ad and tracker blocking in many apps and websites (*AdGuard DNS*), malware protection (*Quad9*) and sometimes faster loading, if your provider's DNS is slow.
+
+**What is the difference from entering the DNS manually?**
+The DNS can be the same, but on Fire TV the manual way means forgetting your Wi-Fi, re-entering the password and typing a static IP, gateway and DNS with the remote, every time you want to switch. FireDNS does it in one click and adds encrypted DNS (DoH) and automatic fallback.
+
 **Why does it need VPN permission?**
 Android does not let apps change the Wi-Fi DNS since Android 10. A local VPN is the only way to redirect DNS without root. FireDNS routes only DNS addresses into it: your streams and downloads never pass through the app.
 
@@ -68,6 +74,12 @@ It needs to stay running: if you force close it, the Fire TV goes back to your n
 
 **Does it block ads on YouTube, Prime Video, Hotstar…?**
 No. Those apps serve ads from the same servers as the video, so no DNS-based blocker (FireDNS, Pi-hole, AdGuard DNS…) can block them without breaking playback. With *AdGuard DNS* FireDNS blocks a lot of ads and trackers in other apps and on websites.
+
+**Does it block the ads on the Fire TV home screen?**
+This has not been tested. FireDNS applies whatever your DNS provider blocks, so the result depends on its blocklist. Keep in mind that blocking Amazon domains with a custom blocklist can also break parts of the home screen.
+
+**Does it help with streaming or ISP throttling?**
+It does not touch the video traffic, so it won't improve quality by itself. It can help if your ISP interferes at the DNS level or its DNS sends you to a poor streaming server. It won't help if the ISP slows down the traffic itself.
 
 **Can I use NextDNS or my Pi-hole?**
 Yes. Press *Add DNS* and enter:
@@ -90,6 +102,9 @@ Only your DNS queries, to the provider you selected (or to your network DNS duri
 
 **How do I check it works?**
 Select *AdGuard DNS* and open a site full of ads, or from a computer run `adb shell ping -c1 doubleclick.net`: with AdGuard it resolves to `0.0.0.0`/`127.0.0.1`, with Cloudflare to a real address.
+
+**Installation fails with "package damaged or incompatible". What can I do?**
+Check *Settings → My Fire TV → About → Fire TV OS*. FireDNS needs Fire OS 7 or later: if you see 6.x, look for a system update, because the app cannot be installed on that version. Otherwise the download may be incomplete: delete the file in Downloader and download it again with the full URL above.
 
 ## How it works
 
