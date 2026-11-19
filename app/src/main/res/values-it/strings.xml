@@ -4,7 +4,7 @@
     <string name="onboarding_title">DNS più veloce e privato, in un tocco</string>
     <string name="onboarding_point_what">Passa da Cloudflare, Google, AdGuard, Quad9 o un tuo DNS senza toccare le impostazioni Wi-Fi.</string>
     <string name="onboarding_point_vpn">FireDNS usa una VPN locale, quindi Android chiederà il permesso. Solo le query DNS passano da lì.</string>
-    <string name="onboarding_point_privacy">Nessun dato lascia il dispositivo, tranne le query DNS verso il provider scelto e un controllo giornaliero delle nuove versioni su GitHub (disattivabile nelle Impostazioni).</string>
+    <string name="onboarding_point_privacy">Nessun dato lascia il dispositivo, tranne le query DNS verso il provider scelto e un controllo giornaliero degli aggiornamenti (disattivabile nelle Impostazioni).</string>
     <string name="action_continue">Continua</string>
 
     <!-- Home -->
@@ -50,7 +50,7 @@
     <string name="settings_fallback">Fallback automatico</string>
     <string name="settings_fallback_desc">Usa il DNS di rete se quello scelto non risponde</string>
     <string name="settings_updates">Controlla aggiornamenti</string>
-    <string name="settings_updates_desc">Una volta al giorno legge da GitHub il numero dell\'ultima versione. Non viene inviato nulla su di te.</string>
+    <string name="settings_updates_desc">Una volta al giorno verifica se c\'è una nuova versione. Non viene inviato nulla su di te.</string>
     <string name="settings_info">Info</string>
     <string name="settings_info_desc">Versione, licenza, codice sorgente</string>
     <string name="info_version">Versione %1$s</string>
