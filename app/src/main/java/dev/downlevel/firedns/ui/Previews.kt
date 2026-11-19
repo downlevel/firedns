@@ -93,7 +93,15 @@ private fun OnboardingPreview() = Frame { OnboardingScreen(onContinue = {}) }
 
 @Preview(name = "Settings", device = Devices.TV_1080p)
 @Composable
-private fun SettingsPreview() = Frame { SettingsScreen(Settings(), {}, {}, {}) }
+private fun SettingsPreview() = Frame {
+    SettingsScreen(
+        settings = Settings(),
+        onAutostartChange = {},
+        onFallbackChange = {},
+        onCheckUpdatesChange = {},
+        onOpenInfo = {}
+    )
+}
 
 @Preview(name = "Info", device = Devices.TV_1080p)
 @Composable
