@@ -10,7 +10,7 @@ Sources:
 
 - [ ] **Exclude apps from FireDNS (per-app allowlist)** — [#1](https://github.com/downlevel/firedns/issues/1) — [R1] Let the user pick installed and system apps that keep using the network DNS. Android supports it via `VpnService.Builder.addDisallowedApplication` (today only FireDNS excludes itself, `DnsVpnService.kt`). Needs: an app picker usable with the D-pad, persisted package list, restarting the tunnel on change.
 - [ ] **Make NextDNS easier to find** — [R1] A user asked to "add NextDNS" without realising custom DoH already supports it. Options: a NextDNS template in *Add DNS* that only asks for the configuration ID, or a clearer hint on the Home screen.
-- [ ] **Tell users when an update is available** — [R1] A user asked how to know there is a new version. Implemented for v1.1.0 (branch `feature/self-update`): daily check of `version.json`, notification and Home banner, one-click download and install, *What's new* after the update. On by default, can be turned off in Settings. Tick when v1.1.0 is released and verified on a device.
+- [x] **Tell users when an update is available** — [R1] A user asked how to know there is a new version. Released in v1.1.0: daily check of `version.json`, notification and Home banner, one-click download and install, *What's new* after the update. On by default, can be turned off in Settings. Update from v1.1.0 to v1.1.1 verified on a Fire TV Stick HD (Fire OS 7).
 
 ## Compatibility
 
