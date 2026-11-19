@@ -30,6 +30,7 @@ fun SettingsScreen(
     settings: Settings,
     onAutostartChange: (Boolean) -> Unit,
     onFallbackChange: (Boolean) -> Unit,
+    onCheckUpdatesChange: (Boolean) -> Unit,
     onOpenInfo: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -50,6 +51,12 @@ fun SettingsScreen(
                 description = stringResource(R.string.settings_fallback_desc),
                 checked = settings.fallbackEnabled,
                 onCheckedChange = onFallbackChange
+            )
+            SwitchSettingsRow(
+                title = stringResource(R.string.settings_updates),
+                description = stringResource(R.string.settings_updates_desc),
+                checked = settings.checkUpdates,
+                onCheckedChange = onCheckUpdatesChange
             )
             SettingsRow(
                 title = stringResource(R.string.settings_info),

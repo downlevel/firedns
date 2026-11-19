@@ -4,7 +4,7 @@
     <string name="onboarding_title">DNS più veloce e privato, in un tocco</string>
     <string name="onboarding_point_what">Passa da Cloudflare, Google, AdGuard, Quad9 o un tuo DNS senza toccare le impostazioni Wi-Fi.</string>
     <string name="onboarding_point_vpn">FireDNS usa una VPN locale, quindi Android chiederà il permesso. Solo le query DNS passano da lì.</string>
-    <string name="onboarding_point_privacy">Nessun dato lascia il dispositivo, tranne le query DNS verso il provider scelto.</string>
+    <string name="onboarding_point_privacy">Nessun dato lascia il dispositivo, tranne le query DNS verso il provider scelto e un controllo giornaliero delle nuove versioni su GitHub (disattivabile nelle Impostazioni).</string>
     <string name="action_continue">Continua</string>
 
     <!-- Home -->
@@ -49,6 +49,8 @@
     <string name="settings_autostart_desc">Riattiva FireDNS quando la Fire TV si riavvia</string>
     <string name="settings_fallback">Fallback automatico</string>
     <string name="settings_fallback_desc">Usa il DNS di rete se quello scelto non risponde</string>
+    <string name="settings_updates">Controlla aggiornamenti</string>
+    <string name="settings_updates_desc">Una volta al giorno legge da GitHub il numero dell\'ultima versione. Non viene inviato nulla su di te.</string>
     <string name="settings_info">Info</string>
     <string name="settings_info_desc">Versione, licenza, codice sorgente</string>
     <string name="info_version">Versione %1$s</string>
@@ -63,4 +65,27 @@
     <string name="notif_active">FireDNS attivo · %1$s</string>
     <string name="notif_fallback">FireDNS in fallback · DNS di rete</string>
     <string name="notif_turn_off">Disattiva</string>
+    <string name="notif_channel_updates">Aggiornamenti</string>
+    <string name="notif_update_available">È disponibile FireDNS %1$s</string>
+    <string name="notif_update_available_text">Apri FireDNS per vedere le novità e aggiornare.</string>
+    <string name="notif_updated">FireDNS aggiornato alla %1$s</string>
+    <string name="notif_updated_text">Apri FireDNS per vedere le novità.</string>
+
+    <!-- Aggiornamenti -->
+    <string name="banner_update">È disponibile FireDNS %1$s</string>
+    <string name="banner_update_action">Dettagli</string>
+    <string name="update_title">FireDNS %1$s</string>
+    <string name="update_subtitle">È disponibile una nuova versione</string>
+    <string name="update_now">Aggiorna ora</string>
+    <string name="update_later">Più tardi</string>
+    <string name="update_install">Installa</string>
+    <string name="update_downloading">Download in corso…</string>
+    <string name="update_downloading_percent">Download in corso… %1$d%%</string>
+    <string name="update_failed">Download non riuscito. Controlla la connessione e riprova.</string>
+    <string name="update_permission_title">Consenti a FireDNS di installare l\'aggiornamento</string>
+    <string name="update_permission_message">Fire OS lo chiede una sola volta. Attiva FireDNS nella schermata successiva. Se non si apre, vai su Impostazioni → La mia Fire TV → Opzioni sviluppatore → Installa app sconosciute → FireDNS.</string>
+    <string name="update_permission_open">Apri impostazioni</string>
+    <string name="whatsnew_title">Novità</string>
+    <string name="whatsnew_subtitle">FireDNS %1$s</string>
+    <string name="whatsnew_done">Ho capito</string>
 </resources>

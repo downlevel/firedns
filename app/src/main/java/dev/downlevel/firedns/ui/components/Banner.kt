@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -19,7 +20,7 @@ import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.Text
 import dev.downlevel.firedns.ui.theme.FireDnsColors
 
-enum class BannerKind { Warning, Error }
+enum class BannerKind { Info, Warning, Error }
 
 @Composable
 fun Banner(
@@ -29,7 +30,11 @@ fun Banner(
     actionLabel: String? = null,
     onAction: () -> Unit = {}
 ) {
-    val color = if (kind == BannerKind.Warning) FireDnsColors.Warning else FireDnsColors.Error
+    val color = when (kind) {
+        BannerKind.Info -> FireDnsColors.Fire
+        BannerKind.Warning -> FireDnsColors.Warning
+        BannerKind.Error -> FireDnsColors.Error
+    }
     val shape = RoundedCornerShape(12.dp)
     Row(
         modifier = modifier
@@ -39,7 +44,11 @@ fun Banner(
             .padding(horizontal = 20.dp, vertical = 8.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Icon(Icons.Filled.Warning, contentDescription = null, tint = color)
+        Icon(
+            if (kind == BannerKind.Info) Icons.Filled.Info else Icons.Filled.Warning,
+            contentDescription = null,
+            tint = color
+        )
         Spacer(Modifier.width(12.dp))
         Text(text, style = MaterialTheme.typography.bodyLarge, modifier = Modifier.weight(1f))
         if (actionLabel != null) {

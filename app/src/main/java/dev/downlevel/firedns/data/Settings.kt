@@ -11,6 +11,12 @@ data class Settings(
     val autostartOnBoot: Boolean = true,
     val fallbackEnabled: Boolean = true,
     val onboardingDone: Boolean = false,
+    /** Daily check of the latest GitHub release (see update/UpdateChecker). */
+    val checkUpdates: Boolean = true,
+    /** Last versionCode whose "What's new" the user has seen; 0 = never recorded. */
+    val lastSeenVersionCode: Int = 0,
+    /** Last available versionCode already announced with a notification, so it is not repeated. */
+    val notifiedUpdateVersionCode: Int = 0,
     val customProfiles: List<DnsProfile> = emptyList()
 ) {
     fun findProfile(id: String): DnsProfile? = Presets.byId(id) ?: customProfiles.firstOrNull { it.id == id }

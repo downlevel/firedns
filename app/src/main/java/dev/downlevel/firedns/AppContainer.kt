@@ -9,6 +9,8 @@ import dev.downlevel.firedns.data.ProfileRepository
 import dev.downlevel.firedns.data.Settings
 import dev.downlevel.firedns.data.SettingsRepository
 import dev.downlevel.firedns.data.SettingsSerializer
+import dev.downlevel.firedns.update.UpdateChecker
+import dev.downlevel.firedns.update.UpdateManager
 import dev.downlevel.firedns.vpn.AndroidVpnController
 import dev.downlevel.firedns.vpn.VpnController
 import dev.downlevel.firedns.vpn.VpnStateStore
@@ -44,6 +46,20 @@ class AppContainer(context: Context) {
             .writeTimeout(3, TimeUnit.SECONDS)
             .callTimeout(5, TimeUnit.SECONDS)
             .build()
+    }
+
+    /** Separate client for the updater: the APK download needs longer timeouts than DoH. */
+    private val updateHttpClient: OkHttpClient by lazy {
+        httpClient.newBuilder()
+            .connectTimeout(10, TimeUnit.SECONDS)
+            .readTimeout(30, TimeUnit.SECONDS)
+            .writeTimeout(10, TimeUnit.SECONDS)
+            .callTimeout(0, TimeUnit.SECONDS)
+            .build()
+    }
+
+    val updateManager: UpdateManager by lazy {
+        UpdateManager(context, settingsRepository, UpdateChecker(updateHttpClient), appScope)
     }
 
     private companion object {

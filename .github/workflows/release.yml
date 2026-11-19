@@ -12,6 +12,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      # The notes feed both the in-app "What's new" screen (bundled asset) and version.json.
+      - name: Check release notes
+        run: |
+          NOTES="app/src/main/assets/release-notes/${GITHUB_REF_NAME#v}.json"
+          if [ ! -f "$NOTES" ]; then
+            echo "::error::Missing $NOTES: write the release notes before tagging (see README, Release section)"
+            exit 1
+          fi
+          jq -e 'type == "object" and (.en | type == "array" and length > 0)' "$NOTES" > /dev/null \
+            || { echo "::error::$NOTES must be {\"en\": [...], \"it\": [...]} with at least one English note"; exit 1; }
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
@@ -53,7 +63,23 @@ jobs:
         run: ./gradlew testReleaseUnitTest assembleRelease
       # Fixed name: releases/latest/download/firedns.apk always points to the latest version.
       - run: cp app/build/outputs/apk/release/app-release.apk firedns.apk
+      # Read by the in-app updater from releases/latest/download/version.json.
+      # versionCode must match the one Gradle used (GITHUB_RUN_NUMBER, see app/build.gradle.kts).
+      - name: Write version.json
+        run: |
+          VERSION="${GITHUB_REF_NAME#v}"
+          jq -n \
+            --argjson versionCode "$GITHUB_RUN_NUMBER" \
+            --arg versionName "$VERSION" \
+            --arg apkUrl "https://github.com/${GITHUB_REPOSITORY}/releases/download/${GITHUB_REF_NAME}/firedns.apk" \
+            --arg sha256 "$(sha256sum firedns.apk | cut -c1-64)" \
+            --slurpfile notes "app/src/main/assets/release-notes/${VERSION}.json" \
+            '{versionCode: $versionCode, versionName: $versionName, apkUrl: $apkUrl, sha256: $sha256, notes: $notes[0]}' \
+            > version.json
+          cat version.json
       - uses: softprops/action-gh-release@v2
         with:
-          files: firedns.apk
+          files: |
+            firedns.apk
+            version.json
           generate_release_notes: true

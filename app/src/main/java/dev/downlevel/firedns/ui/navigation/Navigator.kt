@@ -13,6 +13,12 @@ sealed interface Screen {
     data object Settings : Screen
 
     data object Info : Screen
+
+    /** A newer release is available. */
+    data object Update : Screen
+
+    /** Shown once after an update. */
+    data object WhatsNew : Screen
 }
 
 /** Minimal back stack: the app has few screens and no deep links. */
