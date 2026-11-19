@@ -74,9 +74,11 @@
 - [x] *Update* screen, *Install unknown apps* dialog, Home banner, *Check for updates* setting (on by default)
 - [x] *What's new* screen after an update, notes bundled in `assets/release-notes/`
 - [x] README/onboarding: disclose the update check
-- [ ] CI green on the branch (lint, ktlint, tests, debug build)
-- [ ] Verify on device: install v1.1.0 over v1.0.0 by hand → *What's new*; then a test tag (e.g. v1.1.1) → notification, banner, download, *Install unknown apps* prompt, install, VPN back on, *What's new*
-- [ ] Check that `ACTION_MANAGE_UNKNOWN_APP_SOURCES` opens on Fire OS 7 and 8; otherwise only the manual path in the dialog is left
+- [x] CI green on the branch (lint, ktlint, tests, debug build)
+- [x] Verify on device: install v1.1.0 over v1.0.0 by hand → *What's new*; then v1.1.1 → banner, download, *Install unknown apps* prompt, install, VPN back on, *What's new* (Fire TV Stick HD, Fire OS 7)
+- [x] `ACTION_MANAGE_UNKNOWN_APP_SOURCES` opens the right screen on Fire OS 7
+- [ ] Same check on Fire OS 8 (no device yet)
+- [ ] Daily background check: notification shows up within 24 h without opening the app
 - [ ] Announce v1.1 in the Reddit thread: the last manual update
 
 ## Milestone 6 — nice-to-have
