@@ -15,6 +15,13 @@ class SettingsRepository(private val store: DataStore<Settings>) {
 
     suspend fun setOnboardingDone() = update { it.copy(onboardingDone = true) }
 
+    suspend fun setCheckUpdates(enabled: Boolean) = update { it.copy(checkUpdates = enabled) }
+
+    suspend fun setLastSeenVersionCode(versionCode: Int) = update { it.copy(lastSeenVersionCode = versionCode) }
+
+    suspend fun setNotifiedUpdateVersionCode(versionCode: Int) =
+        update { it.copy(notifiedUpdateVersionCode = versionCode) }
+
     private suspend fun update(transform: (Settings) -> Settings) {
         store.updateData(transform)
     }

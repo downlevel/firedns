@@ -41,6 +41,8 @@
 │  │                          ▼                 (DataStore)   │     │
 │  │                 VpnController (start/stop)               │     │
 │  │ BootReceiver ──► VpnController                           │     │
+│  │ UpdateJobService (daily) ─► UpdateManager ─► UpdateChecker│    │
+│  │        version.json / APK from GitHub Releases (OkHttp)  │     │
 │  └──────────────────────────────────────────────────────────┘     │
 │                         │ upstream traffic (outside the tunnel)   │
 └─────────────────────────┼─────────────────────────────────────────┘
@@ -84,7 +86,8 @@ dev.downlevel.firedns          (applicationId; debug: dev.downlevel.firedns.debu
 ├── dns/         Ipv4, DnsMessage, Bytes, DnsCache, DnsForwarder, FallbackPolicy
 │   └── resolver/  DnsResolver, DohResolver, UdpResolver, ChainResolver, ResolverFactory
 ├── vpn/         DnsVpnService, VpnController/VpnState, AndroidVpnController, FakeVpnController, BootReceiver, Autostart
-├── ui/          FireDnsRoot, navigation/, theme/, components/, home/, editor/, settings/, onboarding/, Previews
+├── update/      UpdateManifest/ReleaseNotes, UpdateChecker, UpdateManager, UpdateNotifications, UpdateJobService/UpdateScheduler
+├── ui/          FireDnsRoot, navigation/, theme/, components/, home/, editor/, settings/, onboarding/, update/, Previews
 └── AppContainer.kt, FireDnsApp.kt, MainActivity.kt
 ```
 
@@ -98,6 +101,9 @@ DataStore JSON (`firedns_settings.json`):
   "autostartOnBoot": true,
   "fallbackEnabled": true,
   "onboardingDone": true,
+  "checkUpdates": true,              // daily update check (on by default)
+  "lastSeenVersionCode": 12,         // last version whose "What's new" was shown
+  "notifiedUpdateVersionCode": 13,   // last available version already notified
   "customProfiles": [
     {
       "id": "uuid",
@@ -117,13 +123,21 @@ DataStore JSON (`firedns_settings.json`):
 - **Build types**: `debug` (applicationId suffix `.debug`, installable side by side, signed with the committed `debug.keystore`) and `release` (R8 minify + resource shrinking + signing).
 - **GitHub Actions pipelines**:
   - `ci.yml` — on push/PR: `./gradlew ktlintCheck lint testDebugUnitTest assembleDebug`, debug APK as artifact.
-  - `release.yml` — on `v*` tags: decodes and checks the keystore from secrets, `testReleaseUnitTest assembleRelease`, renames the output to `firedns.apk` and creates a GitHub Release with generated notes.
+  - `release.yml` — on `v*` tags: checks that `app/src/main/assets/release-notes/<version>.json` exists, decodes and checks the keystore from secrets, `testReleaseUnitTest assembleRelease`, renames the output to `firedns.apk`, writes `version.json` (see *Self-update*) and creates a GitHub Release with both files and generated notes.
 - **Secrets**: `KEYSTORE_BASE64`, `KEYSTORE_PASSWORD`, `KEY_ALIAS`, `KEY_PASSWORD`.
 - **Stable Downloader URL**: `https://github.com/downlevel/firedns/releases/latest/download/firedns.apk` (works only with a public repository); a short Downloader code can point to it.
 - **Versioning**: SemVer; `versionName` from the tag (`v1.2.3` → `1.2.3`, otherwise `0.1.0-dev`), `versionCode` = `GITHUB_RUN_NUMBER` (1 locally).
 - **Signing**: `signingConfigs.release` is created only when `FIREDNS_KEYSTORE` is set; locally `assembleRelease` produces an unsigned APK.
 - **TV manifest**: `LEANBACK_LAUNCHER` on a dedicated `activity-alias`, 320×180 `android:banner`, `uses-feature android.software.leanback required=false`, `android.hardware.touchscreen required=false`.
 - **Launcher icon on Fire OS 7** (verified on Fire TV Stick HD): for sideloaded apps the Amazon launcher ignores `android:banner` and the alias icon, and shows the application icon centered on a `#5A5A5A` gray tile. That is why `ic_launcher` is a PNG flame on a transparent background (the same technique Kodi uses). The launcher **caches icons by package name, even across uninstalls**: icon changes show up late (first on Home, then in "Your apps"); when testing, reboot and be patient rather than drawing conclusions from the first attempt.
+
+### Self-update
+- **Source**: `releases/latest/download/version.json`, written by `release.yml` next to `firedns.apk`: `versionCode` (= `GITHUB_RUN_NUMBER`, the same value Gradle uses), `versionName`, `apkUrl` (the versioned release asset), `sha256`, `notes` (`{"en": [...], "it": [...]}`). No GitHub API, so no rate limit.
+- **When**: `UpdateJobService` (JobScheduler, every 24 h, any network, persisted across reboots), scheduled at app start when the check is on; plus a check each time the UI opens. The request leaves outside the tunnel, because FireDNS excludes itself from it. Off in debug builds (`BuildConfig.UPDATE_CHECK`): a different applicationId and signature cannot update from the release APK.
+- **Flow**: newer `versionCode` and an `apkUrl` from this repository → `UpdateState.Available` → notification (once per version, `notifiedUpdateVersionCode`) and a Home banner → *Update* screen → download to `cache/updates/` with SHA-256 check → `ACTION_VIEW` on a `FileProvider` URI (the route Downloader uses on Fire TV). Needs `REQUEST_INSTALL_PACKAGES` and the per-app *Install unknown apps* permission. A dialog explains it, and `ACTION_MANAGE_UNKNOWN_APP_SOURCES` may be missing on some Fire OS builds.
+- **Trust**: HTTPS, an `apkUrl` prefix check, SHA-256, and above all Android itself, which refuses an update not signed with the same release key.
+- **After the update**: `BootReceiver` (`MY_PACKAGE_REPLACED`) restores the VPN as before and posts "Updated to X". On the next launch `FireDnsRoot` shows *What's new* once (`ReleaseNotes.shouldShowWhatsNew`, notes bundled in `assets/release-notes/<versionName>.json`). Never after a fresh install.
+- **Turning it off** cancels the job, the notification and any downloaded APK.
 
 ## Testing & observability
 - **Unit tests** (JVM, 61): IPv4/UDP/TCP packet builder and parser with checksums, DNS messages, DnsCache (TTL, ID rewrite, LRU), DnsForwarder (cache, SERVFAIL, RST, fallback), FallbackPolicy, resolvers (DoH with MockWebServer, UDP with a local socket, chain), profile input validation, DataStore serialization and repositories, editor form, navigation, autostart rules.

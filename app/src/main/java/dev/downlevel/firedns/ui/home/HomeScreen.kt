@@ -63,7 +63,9 @@ fun HomeScreen(
     onEdit: (DnsProfile) -> Unit,
     onDelete: (DnsProfile) -> Unit,
     onOpenSettings: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    updateVersionName: String? = null,
+    onOpenUpdate: () -> Unit = {}
 ) {
     var menuFor by remember { mutableStateOf<DnsProfile?>(null) }
     var deleteFor by remember { mutableStateOf<DnsProfile?>(null) }
@@ -78,6 +80,15 @@ fun HomeScreen(
             StatusHeader(state.vpnState, state.activeProfile)
         }
         StatusBanner(state.vpnState, onRetry, Modifier.padding(top = 16.dp))
+        if (updateVersionName != null) {
+            Banner(
+                text = stringResource(R.string.banner_update, updateVersionName),
+                kind = BannerKind.Info,
+                modifier = Modifier.padding(top = 16.dp),
+                actionLabel = stringResource(R.string.banner_update_action),
+                onAction = onOpenUpdate
+            )
+        }
         Spacer(Modifier.weight(1f))
         Text(stringResource(R.string.home_profiles), style = MaterialTheme.typography.titleLarge)
         LazyRow(

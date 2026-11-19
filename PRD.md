@@ -26,6 +26,12 @@ On Fire TV (Fire OS) the only way to change DNS is to forget the Wi-Fi network a
 - **English and Italian UI** (follows the system language).
 - **About screen** with version, repository link and lawful-use disclaimer.
 
+### v1.1 — Self-update
+- **Update check**: once a day (and when the app opens) FireDNS reads `version.json` from the latest GitHub Release. On by default, can be turned off in Settings, and disclosed in onboarding and the README, because it is the only request besides DNS.
+- **Notification + Home banner** when a newer version is out (once per version), since users rarely open the app.
+- **One-click update**: download the APK, check its SHA-256, open Android's installer. A silent install is not possible without root.
+- **What's new**: shown once after each update, with a notification when the update lands. Notes are written per release in EN and IT.
+
 ### Nice-to-have (v1.1+)
 - **Latency test** of the profiles (ms shown on the cards, fastest highlighted).
 - **Quick toggle/tile** from the launcher (check what Fire OS allows).
@@ -52,7 +58,7 @@ Relations: Settings → one active DnsProfile (1:1); custom profiles 0..N.
 ## Non-functional requirements
 - **Performance**: < 10 ms added latency per query over the upstream round trip; in-memory DNS cache honoring TTLs; negligible CPU/RAM at rest (the Stick has limited resources).
 - **Reliability**: the VPN must never leave the device without DNS (fallback); the service survives in the foreground with a notification.
-- **Security/privacy**: no telemetry, no analytics, no backend; non-DNS traffic does **not** enter the tunnel; queries are sent only to the chosen provider (or to the system DNS during fallback). DoH for all built-in profiles.
+- **Security/privacy**: no telemetry, no analytics, no backend; the only non-DNS request is the optional daily update check (an anonymous GET of a static file on GitHub); non-DNS traffic does **not** enter the tunnel; queries are sent only to the chosen provider (or to the system DNS during fallback). DoH for all built-in profiles.
 - **Accessibility**: fully D-pad navigable, focus always visible, compatible with VoiceView (the Fire OS screen reader), WCAG AA contrast, text readable from 3 m.
 - **i18n**: EN (default) + IT, all strings in `strings.xml`.
 - **Compatibility**: minSdk 28 (Fire OS 7), recent targetSdk; tested on at least 2-3 Fire TV generations, including Fire OS 8 and, if possible, Fire OS 14.

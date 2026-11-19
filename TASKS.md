@@ -67,7 +67,19 @@
 - [ ] Tag `v1.0.0` → Release → register a Downloader short code
 - [ ] Announce on r/fireTV, r/Adguard, r/nextdns, XDA (privacy/ad-blocking positioning only)
 
-## Milestone 5 — v1.1 (nice-to-have)
+## Milestone 5 — v1.1 Self-update
+- [x] `version.json` in `release.yml` (versionCode, versionName, apkUrl, sha256, notes) + release notes check
+- [x] `UpdateChecker` (fetch + download with SHA-256) and `UpdateManager` (state, install intent, cleanup), with unit tests
+- [x] Daily `UpdateJobService`, "update available" and "updated" notifications
+- [x] *Update* screen, *Install unknown apps* dialog, Home banner, *Check for updates* setting (on by default)
+- [x] *What's new* screen after an update, notes bundled in `assets/release-notes/`
+- [x] README/onboarding: disclose the update check
+- [ ] CI green on the branch (lint, ktlint, tests, debug build)
+- [ ] Verify on device: install v1.1.0 over v1.0.0 by hand → *What's new*; then a test tag (e.g. v1.1.1) → notification, banner, download, *Install unknown apps* prompt, install, VPN back on, *What's new*
+- [ ] Check that `ACTION_MANAGE_UNKNOWN_APP_SOURCES` opens on Fire OS 7 and 8; otherwise only the manual path in the dialog is left
+- [ ] Announce v1.1 in the Reddit thread: the last manual update
+
+## Milestone 6 — nice-to-have
 - [ ] Profile latency test with "ms" badges on the cards and the fastest highlighted
 - [ ] Quick toggle/tile (check what Fire OS allows first)
 - [ ] In-app language picker

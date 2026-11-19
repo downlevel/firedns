@@ -36,6 +36,10 @@ class SettingsSerializerTest {
         val settings = SettingsSerializer.readFrom(ByteArrayInputStream(json.toByteArray()))
         assertEquals("preset:quad9", settings.activeProfileId)
         assertEquals(Settings().autostartOnBoot, settings.autostartOnBoot)
+        // Settings saved before the updater existed: check on by default, nothing seen or notified.
+        assertTrue(settings.checkUpdates)
+        assertEquals(0, settings.lastSeenVersionCode)
+        assertEquals(0, settings.notifiedUpdateVersionCode)
         assertTrue(settings.customProfiles.isEmpty())
     }
 

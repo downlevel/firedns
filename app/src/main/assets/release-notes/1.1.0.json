@@ -1,0 +1,12 @@
+{
+  "en": [
+    "FireDNS now tells you when a new version is out and updates itself in one click: download, then confirm on Android's install screen.",
+    "After each update, this screen shows what's new.",
+    "The check runs once a day and only reads the latest version number from GitHub. You can turn it off in Settings."
+  ],
+  "it": [
+    "FireDNS ora ti avvisa quando esce una nuova versione e si aggiorna con un clic: scarica, poi confermi nella schermata di installazione di Android.",
+    "Dopo ogni aggiornamento, questa schermata mostra le novità.",
+    "Il controllo avviene una volta al giorno e legge da GitHub solo il numero dell'ultima versione. Puoi disattivarlo nelle Impostazioni."
+  ]
+}

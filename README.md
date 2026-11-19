@@ -98,7 +98,12 @@ FireDNS catches the queries the system sends to the virtual DNS and to the **pub
 No. Android allows one VPN at a time. If you turn on another VPN, FireDNS stops and tells you.
 
 **Is my data sent anywhere?**
-Only your DNS queries, to the provider you selected (or to your network DNS during a fallback). There is no backend, analytics or crash reporting.
+Only your DNS queries, to the provider you selected (or to your network DNS during a fallback), plus a daily update check. There is no backend, analytics or crash reporting.
+The update check is a plain download of a small file (`version.json`) from this repository's GitHub Releases, with no identifiers. You can turn it off in *Settings → Check for updates*.
+
+**How do I update the app?**
+From version 1.1, FireDNS checks for new versions once a day. When one is out, you get a notification and a banner on the Home screen: open it, press **Update now**, then confirm on Android's install screen. The first time, Fire OS asks you to allow FireDNS to install apps (*Settings → My Fire TV → Developer options → Install unknown apps → FireDNS*). Your settings are kept, FireDNS turns itself back on, and the next time you open it you see what's new.
+On version 1.0, update by hand once: open Downloader, enter `8088747` again and install over the current app.
 
 **How do I check it works?**
 Select *AdGuard DNS* and open a site full of ads, or from a computer run `adb shell ping -c1 doubleclick.net`: with AdGuard it resolves to `0.0.0.0`/`127.0.0.1`, with Cloudflare to a real address.
@@ -131,7 +136,15 @@ Debug builds are signed with the committed `debug.keystore`, so every build inst
 
 ## Release
 
-Pushing a `v*` tag runs `.github/workflows/release.yml`, which publishes a signed `firedns.apk` to GitHub Releases. It needs these repository secrets:
+Before tagging, write the release notes in `app/src/main/assets/release-notes/<version>.json` (e.g. `1.1.0.json` for `v1.1.0`):
+
+```json
+{ "en": ["What changed, in plain words"], "it": ["Cosa è cambiato, in parole semplici"] }
+```
+
+They are bundled in the APK for the *What's new* screen and copied into `version.json` for the update screen. The release fails if the file is missing or has no English notes.
+
+Pushing a `v*` tag runs `.github/workflows/release.yml`, which publishes a signed `firedns.apk` and `version.json` (version, APK URL, SHA-256, notes) to GitHub Releases. Installed apps read `releases/latest/download/version.json` to find updates. It needs these repository secrets:
 
 | Secret | Value |
 |---|---|
